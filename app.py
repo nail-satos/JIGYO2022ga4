@@ -210,7 +210,7 @@ def main():
         # change_loss = st.sidebar.number_input('交換作業のペナルティ（重み）', value=0)
         change_loss = 0
 
-        max_individual = st.sidebar.slider('世代の個体数', value=100, min_value=5, max_value=1000, step=5)
+        max_individual = st.sidebar.slider('世代の個体数', value=200, min_value=5, max_value=1000, step=5)
         max_generation = st.sidebar.slider('生成する世代数(n)', value=100, min_value=5, max_value=1000, step=5)
         mutation_rate = st.sidebar.slider('突然変異の頻度', value=10, min_value=0, max_value=100, step=1)
 
