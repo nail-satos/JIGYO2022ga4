@@ -60,9 +60,9 @@ def main():
 
         # パラーメータの初期設定（製造能力:キャパシティ）
         temp = []
-        temp.append([20, 10, 15])   # マシンA（部品α、部品β、部品γ）
-        temp.append([30, 15, 10])   # マシンB（部品α、部品β、部品γ）
-        temp.append([50, 30, 20])   # マシンC（部品α、部品β、部品γ）
+        temp.append([20, 25, 15])   # マシンA（部品α、部品β、部品γ）
+        temp.append([30, 15, 20])   # マシンB（部品α、部品β、部品γ）
+        temp.append([30, 30, 20])   # マシンC（部品α、部品β、部品γ）
         st.session_state.cap_params_list = temp
 
         # パラメータの初期設定（稼働率）
@@ -318,7 +318,7 @@ def main():
         st.image(image)
 
         st.markdown("Built by [Nail Team]")
-        st.text("Version 4.1")
+        st.text("Version 4.2")
         st.markdown("For More Information check out   (https://nai-lab.com/)")
         
 
