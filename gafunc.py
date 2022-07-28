@@ -165,18 +165,38 @@ def evaluation_individual(df_shift: pd.DataFrame, df_norma: pd.DataFrame, cap_pa
                 # 製造残から、製造した量を減算（その時、後ろの時間帯(h)に関しても、スライスで全て減算する）
                 df_remain.iloc[parts_no, hour: ] = df_remain.iloc[parts_no, hour: ] - cap_params_list[machine_no][parts_no]
 
-            # ステータスごとに添え字を設定
-            if status == 1 or status ==2 or status ==3:
-                status_idx = 0  # 製造時
-            if status == 9:
-                status_idx = 1  # 交換時
-            if status == 0:
-                status_idx = 2  # 遊休時
+            # 淘汰した親類（CO2排出量を極端に大きくして、次の世代に行けなくする）の場合...
             if status == -1:
-                status_idx = 2  # 淘汰した親類（パラメータは交換時で代用）
+                # status_idx = 2  # （パラメータは交換時で代用）
 
-            # CO2排出量を加算
-            df_co2.iloc[machine_no, hour] = df_co2.iloc[machine_no, hour] + co2_params_list[machine_no][status_idx]
+                # CO2排出量を加算
+                df_co2.iloc[machine_no, hour] = df_co2.iloc[machine_no, hour] + 9999
+            else:
+                # 通常の場合...
+
+                # ステータスごとに添え字を設定
+                if status == 1 or status ==2 or status ==3:
+                    status_idx = 0  # 製造時
+                if status == 9:
+                    status_idx = 1  # 交換時
+                if status == 0:
+                    status_idx = 2  # 遊休時
+
+                # CO2排出量を加算
+                df_co2.iloc[machine_no, hour] = df_co2.iloc[machine_no, hour] + co2_params_list[machine_no][status_idx]
+
+            # # ステータスごとに添え字を設定
+            # if status == 1 or status ==2 or status ==3:
+            #     status_idx = 0  # 製造時
+            # if status == 9:
+            #     status_idx = 1  # 交換時
+            # if status == 0:
+            #     status_idx = 2  # 遊休時
+            # if status == -1:
+            #     status_idx = 2  # 淘汰した親類（パラメータは交換時で代用）
+
+            # # CO2排出量を加算
+            # df_co2.iloc[machine_no, hour] = df_co2.iloc[machine_no, hour] + co2_params_list[machine_no][status_idx]
 
             if status == 9:
                 change_score = change_score - change_loss
